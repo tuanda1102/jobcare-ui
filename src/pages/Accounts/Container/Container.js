@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import Form from '../Form/Form';
+import FormAccounts from '../FormAccounts/FormAccounts';
 
 import styles from './Container.module.scss';
 
@@ -69,7 +69,7 @@ function Container() {
             </div>
           </div>
         ) : (
-          <Form form={form} />
+          <FormAccounts form={form} />
         )}
 
         {form ? (
