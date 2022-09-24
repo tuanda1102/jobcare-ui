@@ -1,7 +1,10 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 
 function ProtectedRoute({ redirectPath, isAllowed, children }) {
-    if (!isAllowed) return <Navigate to={redirectPath} />;
+    const navigate = useNavigate();
+    if (!isAllowed) {
+        navigate(redirectPath);
+    }
 
     return children ? children : <Outlet />;
 }

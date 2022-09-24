@@ -2,6 +2,10 @@ export const isAuthSelector = (state) => {
     return state.accounts.isAuth;
 };
 
+export const isSuccessSelector = (state) => {
+    return state.accounts.success;
+};
+
 export const isRegisteredSelector = (state) => {
     return state.accounts.isRegistered;
 };

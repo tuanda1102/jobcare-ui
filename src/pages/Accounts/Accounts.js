@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind';
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
 import Loading from '~/components/Loading/Loading';
 import {
     accountsStatusSelector,
@@ -9,14 +7,19 @@ import {
 } from '~/redux/Selectors/authSelector';
 import styles from './Accounts.module.scss';
 import Container from './Container/Container';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 export default function Accounts() {
-    const status = useSelector(accountsStatusSelector);
     const navigate = useNavigate();
 
+    const status = useSelector(accountsStatusSelector);
     const isAuth = useSelector(isAuthSelector);
+
+    if (isAuth) {
+        navigate('/profile', { replace: true });
+    }
 
     return (
         <div className={cx('wrapper')}>

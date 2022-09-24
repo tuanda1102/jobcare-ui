@@ -1,38 +1,38 @@
 import classNames from 'classnames/bind';
-import styles from './FormAccounts.module.scss';
+import styles from '../FormAccounts.module.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { ButtonSubmit } from '~/StyledComponent/Button';
-import { useEffect, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchLogin, fetchRegister } from '../accountsSlice';
-import { accountsMessageSelector } from '~/redux/Selectors/authSelector';
+import { fetchLogin } from '../accountsSlice';
+import {
+    accountsMessageSelector,
+    isSuccessSelector,
+} from '~/redux/Selectors/authSelector';
 
 const cx = classNames.bind(styles);
 
-function FormAccounts({ form }) {
+function LoginForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const formikRef = useRef(null);
     const messageRef = useRef(null);
     const messageError = useSelector(accountsMessageSelector);
+    const isSuccess = useSelector(isSuccessSelector);
 
-    useEffect(() => {
-        formikRef.current.handleReset();
-    }, [form]);
+    if (isSuccess) {
+        navigate('/');
+    }
 
     const handleSubmit = () => {
         const { email, password } = formikRef.current.values;
 
-        if (form) {
-            if ((email, password)) {
-                const data = { email, password };
-                dispatch(fetchLogin(data));
-            }
-        } else {
-            if (formikRef.current.isSubmitting) {
-                dispatch(fetchRegister(formikRef.current.values));
-            }
+        if (email && password) {
+            const data = { email, password };
+            dispatch(fetchLogin(data));
         }
     };
 
@@ -41,59 +41,22 @@ function FormAccounts({ form }) {
             <Formik
                 innerRef={formikRef}
                 initialValues={{
-                    fullname: '',
                     email: '',
                     password: '',
-                    passwordConfirmation: '',
                 }}
                 onSubmit={() => {
                     handleSubmit();
                 }}
                 validationSchema={Yup.object({
-                    fullname: Yup.string().required(
-                        'Mục này không được để trống!',
-                    ),
                     email: Yup.string()
                         .email('Email không hợp lệ')
                         .required('Mục này không được để trống!'),
                     password: Yup.string()
                         .min(6, 'Mật khẩu phải có ít nhất là 6 ký tự!')
                         .required('Mục này không được để trống!'),
-                    passwordConfirmation: Yup.string()
-                        .oneOf(
-                            [Yup.ref('password'), null],
-                            'Mật khẩu không trùng khớp!',
-                        )
-                        .required('Mục này không được để trống!'),
                 })}
             >
                 <Form>
-                    {/* Full name */}
-                    <div className={cx('form-group')}>
-                        {!form ? (
-                            <>
-                                <div className={cx('label-form-accounts')}>
-                                    <label htmlFor="fullname">
-                                        Tên của bạn?
-                                    </label>
-                                </div>
-                                <div className={cx('input-block')}>
-                                    <Field
-                                        className={cx('input-text')}
-                                        name="fullname"
-                                        type="text"
-                                        placeholder="Họ và tên của bạn"
-                                    />
-                                </div>
-                                <div className={cx('error-message')}>
-                                    <ErrorMessage name="fullname" />
-                                </div>
-                            </>
-                        ) : (
-                            ''
-                        )}
-                    </div>
-
                     {/* Email */}
                     <div className={cx('form-group')}>
                         <div className={cx('label-form-accounts')}>
@@ -129,25 +92,6 @@ function FormAccounts({ form }) {
                             <ErrorMessage name="password" />
                         </div>
                     </div>
-                    {!form ? (
-                        <>
-                            <div className={cx('form-group')}>
-                                <div className={cx('input-block')}>
-                                    <Field
-                                        className={cx('input-text')}
-                                        name="passwordConfirmation"
-                                        type="password"
-                                        placeholder="Nhập lại mật khẩu"
-                                    />
-                                </div>
-                                <div className={cx('error-message')}>
-                                    <ErrorMessage name="passwordConfirmation" />
-                                </div>
-                            </div>
-                        </>
-                    ) : (
-                        ''
-                    )}
 
                     {/* Hiển thị trạng thái đăng nhập, đăng ký */}
                     <div
@@ -165,7 +109,7 @@ function FormAccounts({ form }) {
                         type="submit"
                         className={cx('button-form')}
                     >
-                        {form ? <span>ĐĂNG NHẬP</span> : <span>ĐĂNG KÝ</span>}
+                        <span>ĐĂNG NHẬP</span>
                     </ButtonSubmit>
                 </Form>
             </Formik>
@@ -173,4 +117,4 @@ function FormAccounts({ form }) {
     );
 }
 
-export default FormAccounts;
+export default LoginForm;

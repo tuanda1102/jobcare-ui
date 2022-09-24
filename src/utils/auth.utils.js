@@ -1,26 +1,9 @@
-import { Fragment } from 'react';
-import { Route } from 'react-router-dom';
-import DefaultLayout from '~/components/Layouts/DefaultLayout';
+import axios from 'axios';
 
-export const renderRoutes = (routes) => {
-    return routes.map((route, index) => {
-        let Layout = DefaultLayout;
-        if (route.layout) {
-            Layout = route.layout;
-        } else if (route.layout === null) {
-            Layout = Fragment;
-        }
-        const Page = route.component;
-        return (
-            <Route
-                key={index}
-                path={route.path}
-                element={
-                    <Layout>
-                        <Page />
-                    </Layout>
-                }
-            />
-        );
-    });
+export const setAuthToken = (token) => {
+    if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+        delete axios.defaults.headers.common['Authorization'];
+    }
 };

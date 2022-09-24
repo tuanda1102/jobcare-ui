@@ -7,6 +7,7 @@ export const publicRoutes = [
     { path: '/', component: Home },
     { path: '/accounts', component: Accounts, layout: null },
 ];
+
 export const privateRoutes = [{ path: '/profile', component: Profile }];
 
 export const userPrivateRoutes = [];
