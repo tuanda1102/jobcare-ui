@@ -5,127 +5,172 @@ import * as Yup from 'yup';
 
 import { ButtonSubmit } from '~/StyledComponent/Button';
 import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLogin, fetchRegister } from '../accountsSlice';
+import { accountsMessageSelector } from '~/redux/Selectors/authSelector';
 
 const cx = classNames.bind(styles);
 
 function FormAccounts({ form }) {
-  const formikRef = useRef(null);
+    const dispatch = useDispatch();
+    const formikRef = useRef(null);
+    const messageRef = useRef(null);
+    const messageError = useSelector(accountsMessageSelector);
 
-  useEffect(() => {
-    // console.log();
-    formikRef.current.handleReset();
-    // if (!form) {
-    // }
-  }, [form]);
+    useEffect(() => {
+        formikRef.current.handleReset();
+    }, [form]);
 
-  return (
-    <div className={cx('wrapper')}>
-      <Formik
-        innerRef={formikRef}
-        initialValues={{
-          fullname: '',
-          email: '',
-          password: '',
-          passwordConfirmation: '',
-        }}
-        validationSchema={Yup.object({
-          fullname: Yup.string().required('Mục này không được để trống!'),
-          email: Yup.string()
-            .email('Email không hợp lệ')
-            .required('Mục này không được để trống!'),
-          password: Yup.string()
-            .min(8, 'Mật khẩu phải có ít nhất là 8 ký tự!')
-            .required('Mục này không được để trống!'),
-          passwordConfirmation: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Mật khẩu không trùng khớp!')
-            .required('Mục này không được để trống!'),
-        })}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
-        }}
-      >
-        <Form>
-          {/* Full name */}
-          <div className={cx('form-group')}>
-            {!form ? (
-              <>
-                <div className={cx('label-form-accounts')}>
-                  <label htmlFor="fullname">Tên của bạn?</label>
-                </div>
-                <div className={cx('input-block')}>
-                  <Field
-                    className={cx('input-text')}
-                    name="fullname"
-                    type="text"
-                  />
-                </div>
-                <div className={cx('error-message')}>
-                  <ErrorMessage name="fullname" />
-                </div>
-              </>
-            ) : (
-              ''
-            )}
-          </div>
+    const handleSubmit = () => {
+        const { email, password } = formikRef.current.values;
 
-          {/* Email */}
-          <div className={cx('form-group')}>
-            <div className={cx('label-form-accounts')}>
-              <label htmlFor="email">Địa chỉ Email</label>
-            </div>
-            <div className={cx('input-block')}>
-              <Field className={cx('input-text')} name="email" type="email" />
-            </div>
-            <div className={cx('error-message')}>
-              <ErrorMessage name="email" />
-            </div>
-          </div>
+        if (form) {
+            if ((email, password)) {
+                const data = { email, password };
+                dispatch(fetchLogin(data));
+            }
+        } else {
+            if (formikRef.current.isSubmitting) {
+                dispatch(fetchRegister(formikRef.current.values));
+            }
+        }
+    };
 
-          {/* Password */}
-          <div className={cx('form-group')}>
-            <div className={cx('label-form-accounts')}>
-              <label htmlFor="password">Mật khẩu</label>
-            </div>
-            <div className={cx('input-block')}>
-              <Field
-                className={cx('input-text')}
-                name="password"
-                type="password"
-              />
-            </div>
-            <div className={cx('error-message')}>
-              <ErrorMessage name="password" />
-            </div>
-          </div>
-          {!form ? (
-            <>
-              <div className={cx('form-group')}>
-                <div className={cx('input-block')}>
-                  <Field
-                    className={cx('input-text')}
-                    name="passwordConfirmation"
-                    type="password"
-                  />
-                </div>
-                <div className={cx('error-message')}>
-                  <ErrorMessage name="passwordConfirmation" />
-                </div>
-              </div>
-            </>
-          ) : (
-            ''
-          )}
+    return (
+        <div className={cx('wrapper')}>
+            <Formik
+                innerRef={formikRef}
+                initialValues={{
+                    fullname: '',
+                    email: '',
+                    password: '',
+                    passwordConfirmation: '',
+                }}
+                onSubmit={() => {
+                    handleSubmit();
+                }}
+                validationSchema={Yup.object({
+                    fullname: Yup.string().required(
+                        'Mục này không được để trống!',
+                    ),
+                    email: Yup.string()
+                        .email('Email không hợp lệ')
+                        .required('Mục này không được để trống!'),
+                    password: Yup.string()
+                        .min(6, 'Mật khẩu phải có ít nhất là 6 ký tự!')
+                        .required('Mục này không được để trống!'),
+                    passwordConfirmation: Yup.string()
+                        .oneOf(
+                            [Yup.ref('password'), null],
+                            'Mật khẩu không trùng khớp!',
+                        )
+                        .required('Mục này không được để trống!'),
+                })}
+            >
+                <Form>
+                    {/* Full name */}
+                    <div className={cx('form-group')}>
+                        {!form ? (
+                            <>
+                                <div className={cx('label-form-accounts')}>
+                                    <label htmlFor="fullname">
+                                        Tên của bạn?
+                                    </label>
+                                </div>
+                                <div className={cx('input-block')}>
+                                    <Field
+                                        className={cx('input-text')}
+                                        name="fullname"
+                                        type="text"
+                                        placeholder="Họ và tên của bạn"
+                                    />
+                                </div>
+                                <div className={cx('error-message')}>
+                                    <ErrorMessage name="fullname" />
+                                </div>
+                            </>
+                        ) : (
+                            ''
+                        )}
+                    </div>
 
-          <ButtonSubmit type="submit" className={cx('button-form')}>
-            {form ? <span>ĐĂNG NHẬP</span> : <span>ĐĂNG KÝ</span>}
-          </ButtonSubmit>
-        </Form>
-      </Formik>
-    </div>
-  );
+                    {/* Email */}
+                    <div className={cx('form-group')}>
+                        <div className={cx('label-form-accounts')}>
+                            <label htmlFor="email">Địa chỉ Email</label>
+                        </div>
+                        <div className={cx('input-block')}>
+                            <Field
+                                className={cx('input-text')}
+                                name="email"
+                                type="email"
+                                placeholder="Địa chỉ email"
+                            />
+                        </div>
+                        <div className={cx('error-message')}>
+                            <ErrorMessage name="email" />
+                        </div>
+                    </div>
+
+                    {/* Password */}
+                    <div className={cx('form-group')}>
+                        <div className={cx('label-form-accounts')}>
+                            <label htmlFor="password">Mật khẩu</label>
+                        </div>
+                        <div className={cx('input-block')}>
+                            <Field
+                                className={cx('input-text')}
+                                name="password"
+                                type="password"
+                                placeholder="Mật khẩu"
+                            />
+                        </div>
+                        <div className={cx('error-message')}>
+                            <ErrorMessage name="password" />
+                        </div>
+                    </div>
+                    {!form ? (
+                        <>
+                            <div className={cx('form-group')}>
+                                <div className={cx('input-block')}>
+                                    <Field
+                                        className={cx('input-text')}
+                                        name="passwordConfirmation"
+                                        type="password"
+                                        placeholder="Nhập lại mật khẩu"
+                                    />
+                                </div>
+                                <div className={cx('error-message')}>
+                                    <ErrorMessage name="passwordConfirmation" />
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        ''
+                    )}
+
+                    {/* Hiển thị trạng thái đăng nhập, đăng ký */}
+                    <div
+                        ref={messageRef}
+                        style={{ color: 'red', fontSize: '1.4rem' }}
+                        className={cx('error-message')}
+                    >
+                        {messageError}
+                    </div>
+
+                    <ButtonSubmit
+                        onClick={() => {
+                            handleSubmit();
+                        }}
+                        type="submit"
+                        className={cx('button-form')}
+                    >
+                        {form ? <span>ĐĂNG NHẬP</span> : <span>ĐĂNG KÝ</span>}
+                    </ButtonSubmit>
+                </Form>
+            </Formik>
+        </div>
+    );
 }
 
 export default FormAccounts;

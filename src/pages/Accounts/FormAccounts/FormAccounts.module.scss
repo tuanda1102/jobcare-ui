@@ -4,13 +4,14 @@
   flex-direction: column;
   margin: auto;
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     .label-form-accounts {
       text-align: left;
       font-size: 1.4rem;
       font-weight: 500;
       padding-left: 15px;
-      margin-bottom: 10px;
+      margin: 15px 0 8px 0;
+      // margin-bottom: 10px;
     }
     .input-block {
       background: rgba(22, 24, 35, 0.06);
@@ -20,7 +21,7 @@
       height: 44px;
       overflow: hidden;
       width: 100%;
-      margin-bottom: 10px;
+      margin-bottom: 4px;
       .input-text {
         background-color: transparent;
         border: none;
