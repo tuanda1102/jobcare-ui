@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
+import config from '~/config';
 import {
     adminPrivateRoutes,
     privateRoutes,
@@ -11,12 +13,11 @@ import { fetchUser } from './pages/Accounts/accountsSlice';
 import Home from './pages/Home';
 import ProtectedRoute from './routers/ProtectedRoute';
 import { renderRoutes } from './utils/route.utils';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import {
     accountsDataSelector,
     isAuthSelector,
 } from '~/redux/Selectors/authSelector';
+import DefaultLayout from './Layouts/DefaultLayout';
 
 function App() {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function App() {
                     <Route
                         element={
                             <ProtectedRoute
-                                redirectPath="/accounts"
+                                redirectPath={config.routes.accounts}
                                 isAllowed={isAuth}
                             />
                         }
@@ -50,7 +51,7 @@ function App() {
                     <Route
                         element={
                             <ProtectedRoute
-                                redirectPath="/"
+                                redirectPath={config.routes.home}
                                 isAllowed={
                                     !!isAuth && user?.data?.role === 'recruiter'
                                 }
@@ -63,7 +64,7 @@ function App() {
                     <Route
                         element={
                             <ProtectedRoute
-                                redirectPath="/"
+                                redirectPath={config.routes.home}
                                 isAllowed={
                                     !!isAuth && user?.data?.role === 'admin'
                                 }
@@ -74,7 +75,14 @@ function App() {
                     </Route>
 
                     {/* NOTE FOUND */}
-                    <Route path="*" element={<Home />} />
+                    <Route
+                        path="*"
+                        element={
+                            <DefaultLayout>
+                                <Home />
+                            </DefaultLayout>
+                        }
+                    />
                 </Routes>
             </div>
         </Router>

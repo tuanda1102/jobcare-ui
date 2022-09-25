@@ -24,10 +24,13 @@ export const accountsSlice = createSlice({
                 state.status = 'pending';
             })
             .addCase(fetchUser.fulfilled, (state, action) => {
-                console.log('action', action.payload);
                 state.status = 'idle';
+
                 if (action.payload.success) {
                     state.isAuth = true;
+                    state.data = action.payload.data;
+                } else {
+                    state.isAuth = false;
                 }
             })
             .addCase(fetchLogin.pending, (state) => {
@@ -37,6 +40,7 @@ export const accountsSlice = createSlice({
                 if (action.payload.success) {
                     state.status = 'idle';
                     state.success = true;
+                    state.isAuth = true;
                     localStorage.setItem(
                         LOCAL_STORAGE_TOKEN_NAME,
                         action.payload.data.accessToken,
@@ -100,7 +104,6 @@ export const fetchUser = createAsyncThunk('accounts/fetchUser', async () => {
     }
     try {
         const res = await axios.get(`${API_URL}/api/auth/fetchUser`);
-        console.log('res', res);
         return res.data;
     } catch (error) {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);

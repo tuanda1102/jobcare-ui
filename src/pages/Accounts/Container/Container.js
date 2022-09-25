@@ -1,7 +1,9 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
+
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from '../RegisterForm/RegisterForm';
+import images from '~/assets/images';
 
 import styles from './Container.module.scss';
 
@@ -38,7 +40,7 @@ function Container() {
                 <div className={cx('header')}>
                     <img
                         className={cx('logo')}
-                        src="../../assets/images/logo-test.png"
+                        src={images.logo}
                         alt="logo-test"
                     />
                     {form ? (

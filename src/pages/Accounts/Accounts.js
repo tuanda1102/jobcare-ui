@@ -1,5 +1,8 @@
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import config from '~/config';
 import Loading from '~/components/Loading/Loading';
 import {
     accountsStatusSelector,
@@ -7,7 +10,7 @@ import {
 } from '~/redux/Selectors/authSelector';
 import styles from './Accounts.module.scss';
 import Container from './Container/Container';
-import { useNavigate } from 'react-router-dom';
+import images from '~/assets/images';
 
 const cx = classNames.bind(styles);
 
@@ -18,7 +21,7 @@ export default function Accounts() {
     const isAuth = useSelector(isAuthSelector);
 
     if (isAuth) {
-        navigate('/profile', { replace: true });
+        navigate(config.routes.profile, { replace: true });
     }
 
     return (
@@ -26,7 +29,7 @@ export default function Accounts() {
             {status === 'pending' ? <Loading /> : ''}
             <img
                 className={cx('background-img')}
-                src="../../assets/images/background-recruitment.jpg"
+                src={images.backgroundAccounts}
                 alt="background-recruitment"
             />
 
