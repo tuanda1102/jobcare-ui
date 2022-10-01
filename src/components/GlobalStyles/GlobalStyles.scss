@@ -49,6 +49,12 @@ body {
 
     // radius
     --radius-0: 20px;
+
+    // padding
+    --padding-0: 14px;
+
+    // margin
+    --margin-0: 50px;
 }
 
 a {
@@ -58,6 +64,13 @@ a {
 
 ul {
     list-style-type: none;
+    padding: 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 8px 0;
 }
 
 // CUSTOM SCROLLBAR

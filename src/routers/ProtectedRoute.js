@@ -9,6 +9,7 @@ function ProtectedRoute({ redirectPath, isAllowed, children }) {
         if (isAllowed === false) {
             return navigate(redirectPath);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return children ? children : <Outlet />;

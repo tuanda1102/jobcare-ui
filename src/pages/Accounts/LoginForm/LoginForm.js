@@ -12,6 +12,7 @@ import {
     accountsMessageSelector,
     isSuccessSelector,
 } from '~/redux/Selectors/authSelector';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -24,7 +25,7 @@ function LoginForm() {
     const isSuccess = useSelector(isSuccessSelector);
 
     if (isSuccess) {
-        navigate('/');
+        navigate(config.routes.home);
     }
 
     const handleSubmit = () => {

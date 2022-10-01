@@ -13,7 +13,6 @@ export const accountsSlice = createSlice({
         status: 'idle',
         success: false,
         isAuth: false,
-        isRegistered: '',
         message: '',
         data: {},
     },
@@ -57,13 +56,19 @@ export const accountsSlice = createSlice({
                 state.status = 'pending';
             })
             .addCase(fetchRegister.fulfilled, (state, action) => {
-                if (action.payload) {
+                if (action.payload.success) {
                     state.status = 'idle';
+                    state.success = true;
+                    state.isAuth = true;
                     state.message = '';
-                    state.isRegistered = true;
+                    localStorage.setItem(
+                        LOCAL_STORAGE_TOKEN_NAME,
+                        action.payload.data.accessToken,
+                    );
+                    state.data = action.payload.data;
                 } else {
                     state.status = 'idle';
-                    state.isRegistered = false;
+                    state.success = false;
                     state.message = 'Email đã tồn tại';
                 }
             });

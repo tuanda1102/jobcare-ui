@@ -2,20 +2,32 @@ import classNames from 'classnames/bind';
 import styles from '../FormAccounts.module.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
-import { ButtonSubmit } from '~/StyledComponent/Button';
+import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { ButtonSubmit } from '~/StyledComponent/Button';
 import { fetchRegister } from '../accountsSlice';
-import { accountsMessageSelector } from '~/redux/Selectors/authSelector';
+import {
+    accountsMessageSelector,
+    isSuccessSelector,
+} from '~/redux/Selectors/authSelector';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function RegisterForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const formikRef = useRef(null);
     const messageRef = useRef(null);
     const messageError = useSelector(accountsMessageSelector);
+    const isSuccess = useSelector(isSuccessSelector);
+
+    if (isSuccess) {
+        navigate(config.routes.home);
+    }
 
     const handleSubmit = () => {
         if (formikRef.current.isSubmitting) {

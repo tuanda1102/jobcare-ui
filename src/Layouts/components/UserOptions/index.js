@@ -27,10 +27,8 @@ function UserOptions({ user }) {
                     )}
                 </div>
                 <div className={cx('header-right')}>
-                    <div className={cx('user-name')}>Phạm Anh Tuấn</div>
-                    <div className={cx('user-email')}>
-                        phamanhtuan200420@gmail.com
-                    </div>
+                    <div className={cx('user-name')}>{user.fullname}</div>
+                    <div className={cx('user-email')}>{user.email}</div>
                 </div>
             </div>
             <ul className={cx('option')}>
@@ -40,8 +38,8 @@ function UserOptions({ user }) {
                         <Link to="/">Trang cá nhân</Link>
                     </li>
                 </ul>
-                <hr />
 
+                <hr />
                 <ul className={cx('option-list')}>
                     <li className={cx('option-item')}>
                         <Link to="/">Viết blog</Link>
@@ -50,8 +48,8 @@ function UserOptions({ user }) {
                         <Link to="/">Bài viết đã lưu</Link>
                     </li>
                 </ul>
-                <hr />
 
+                <hr />
                 <ul className={cx('option-list')}>
                     <li className={cx('option-item')}>
                         <Link to="/">Cài đặt</Link>

@@ -18,6 +18,8 @@ import {
     isAuthSelector,
 } from '~/redux/Selectors/authSelector';
 import DefaultLayout from './Layouts/DefaultLayout';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
     const dispatch = useDispatch();

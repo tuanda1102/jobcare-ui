@@ -40,7 +40,7 @@ function Container() {
                 <div className={cx('header')}>
                     <img
                         className={cx('logo')}
-                        src={images.logo}
+                        src={images.logoM}
                         alt="logo-test"
                     />
                     {form ? (
@@ -118,7 +118,7 @@ function Container() {
 
                 <div className={cx('accept-term')}>
                     Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng
-                    ý với <a href="#">Điều khoản sử dụng</a> của chúng tôi
+                    ý với <a href="/">Điều khoản sử dụng</a> của chúng tôi
                 </div>
             </div>
 

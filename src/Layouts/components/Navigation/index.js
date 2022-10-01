@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Navigation.module.scss';
 
@@ -18,13 +18,13 @@ const navigationMenu = [
         role: ['recruiter'],
     },
     {
-        title: 'Tạo CV',
-        to: '/cv',
+        title: 'Làm bài test',
+        to: '/test-user',
         role: ['user'],
     },
     {
-        title: 'Làm bài test',
-        to: '/test-user',
+        title: 'Tạo CV',
+        to: '/cv',
         role: ['user'],
     },
     {
@@ -46,12 +46,12 @@ function Navigation({ role }) {
             if (roleMenu) {
                 return (
                     <li key={index} className={cx('navigation-item')}>
-                        <Link
+                        <NavLink
                             className={cx('navigation-item-link')}
                             to={option.to}
                         >
                             <span>{option.title}</span>
-                        </Link>
+                        </NavLink>
                     </li>
                 );
             }

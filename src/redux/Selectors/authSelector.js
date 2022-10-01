@@ -6,10 +6,6 @@ export const isSuccessSelector = (state) => {
     return state.accounts.success;
 };
 
-export const isRegisteredSelector = (state) => {
-    return state.accounts.isRegistered;
-};
-
 export const accountsStatusSelector = (state) => {
     return state.accounts.status;
 };
