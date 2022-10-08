@@ -6,13 +6,13 @@ import { useState } from 'react';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import config from '~/config';
-import Navigation from '../Navigation';
 import {
     accountsDataSelector,
     isAuthSelector,
 } from '~/redux/Selectors/authSelector';
 import Button from '~/components/Button';
-import UserOptions from '../UserOptions';
+import UserOptions from './UserOptions';
+import Navigation from './Navigation';
 
 const cx = classNames.bind(styles);
 

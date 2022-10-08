@@ -5,10 +5,10 @@ import styles from './Card.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function Card({ data }) {
+export default function Card({ data, to }) {
     return (
         <div className={cx('wrapper')}>
-            <Link className={cx('link')} to="/">
+            <Link className={cx('link')} to={to}>
                 <div className={cx('image-block')}>
                     <img
                         className={cx('image')}
