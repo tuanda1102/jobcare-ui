@@ -1,18 +1,12 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 
-function ProtectedRoute({ redirectPath, isAllowed, children }) {
-    const navigate = useNavigate();
+function ProtectedRoute({ redirectPath, isAllowed }) {
+    if (!isAllowed) {
+        return <Navigate to={redirectPath} replace />;
+    }
 
-    useEffect(() => {
-        if (isAllowed === false) {
-            return navigate(redirectPath);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    return children ? children : <Outlet />;
+    return <Outlet />;
 }
 
 ProtectedRoute.propTypes = {

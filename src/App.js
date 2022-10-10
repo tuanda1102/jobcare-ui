@@ -28,6 +28,7 @@ function App() {
 
     useEffect(() => {
         dispatch(fetchUser());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -44,7 +45,7 @@ function App() {
                             <ProtectedRoute
                                 redirectPath={config.routes.accounts}
                                 isAllowed={isAuth}
-                            />
+                            ></ProtectedRoute>
                         }
                     >
                         {renderRoutes(privateRoutes)}
@@ -55,9 +56,9 @@ function App() {
                             <ProtectedRoute
                                 redirectPath={config.routes.home}
                                 isAllowed={
-                                    !!isAuth && user?.data?.role === 'recruiter'
+                                    isAuth && user?.data?.role === 'recruiter'
                                 }
-                            />
+                            ></ProtectedRoute>
                         }
                     >
                         {renderRoutes(recruiterPrivateRoutes)}
@@ -68,9 +69,9 @@ function App() {
                             <ProtectedRoute
                                 redirectPath={config.routes.home}
                                 isAllowed={
-                                    !!isAuth && user?.data?.role === 'admin'
+                                    isAuth && user?.data?.role === 'admin'
                                 }
-                            />
+                            ></ProtectedRoute>
                         }
                     >
                         {renderRoutes(adminPrivateRoutes)}
