@@ -242,7 +242,7 @@ function Recruitment() {
                             </div>
                         </div>
                     </div>
-                    <div className="content-rule">
+                    <div className={cx('content-rule')}>
                         <input type="checkbox" />
                         <span className={cx('rule')}>
                             Tôi cam kết thông tin mô tả về việc làm là thật và
@@ -250,9 +250,16 @@ function Recruitment() {
                         </span>
                     </div>
                 </div>
-                <div className="save-btn">Lưu nháp</div>
-                <div className="reinput-btn">Nhập lại</div>
-                <div className="post-btn">Đăng bài</div>
+                <div className={cx('submit-btn')}>
+                    <div className={cx('btn-left')}>
+                        <button className={cx('save-btn')}>Lưu nháp</button>
+                    </div>
+
+                    <div className={cx('btn-right')}>
+                        <button className={cx('reinput-btn')}>Nhập lại</button>
+                        <button className={cx('post-btn')}>Đăng bài</button>
+                    </div>
+                </div>
             </div>
         </div>
     );

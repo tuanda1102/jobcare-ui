@@ -1,12 +1,12 @@
 .container {
-    border: 1px solid #000 !important;
+    // border: 1px solid #000 !important;
     max-width: 900px;
     margin-bottom: 20px;
     .content {
         display: flex;
         margin-top: 20px;
         .content {
-            margin-top: 100px;
+            margin-top: 50px;
         }
         .input {
             width: 900px;
@@ -90,11 +90,52 @@
             }
         }
         .content-rule {
-            background: red;
             .rule {
                 margin-left: 20px;
                 font-weight: 900;
             }
+        }
+    }
+    .submit-btn {
+        margin: 20px 0 20px 0;
+        color: var(---black-color);
+        justify-content: space-between;
+        display: flex;
+        .btn-left {
+            .save-btn {
+                background-color: #90a399;
+                color: var(--white-color);
+            }
+        }
+        .btn-right {
+            .reinput-btn {
+                background-color: var(--white-color);
+                margin-right: 20px;
+            }
+            .post-btn {
+                color: var(--white-color);
+
+                background-color: var(--primary-color);
+            }
+        }
+        button {
+            color: var(---black-color);
+            font-size: 1.6rem;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            padding: 8px 18px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: var(--font-family);
+            color: var(---black-color);
+            border: 1px solid transparent;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: pointer;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
     }
 }
