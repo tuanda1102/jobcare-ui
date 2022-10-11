@@ -3,6 +3,7 @@ const routes = {
     admin: '/admin',
     profile: '/profile',
     accounts: '/accounts',
+    blog: '/blog',
 };
 
 export default routes;

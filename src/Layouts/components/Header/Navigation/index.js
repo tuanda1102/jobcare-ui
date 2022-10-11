@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import { memo } from 'react';
 
 import styles from './Navigation.module.scss';
 
@@ -69,4 +70,4 @@ Navigation.propTypes = {
     role: PropTypes.string.isRequired,
 };
 
-export default Navigation;
+export default memo(Navigation);

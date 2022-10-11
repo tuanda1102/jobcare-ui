@@ -1,11 +1,16 @@
-import axios from 'axios';
 import {
     createAsyncThunk,
     createSlice,
     isRejectedWithValue,
 } from '@reduxjs/toolkit';
-import { API_URL, LOCAL_STORAGE_TOKEN_NAME } from '~/constants/constants';
+import { LOCAL_STORAGE_TOKEN_NAME } from '~/constants/constants';
 import { setAuthToken } from '~/utils/auth.utils';
+import {
+    fetchUserApi,
+    loginApi,
+    logoutApi,
+    registerApi,
+} from '~/services/userService';
 
 export const accountsSlice = createSlice({
     name: 'accounts',
@@ -16,6 +21,7 @@ export const accountsSlice = createSlice({
         message: '',
         data: {},
     },
+
     reducers: {},
     extraReducers: (builder) => {
         builder
@@ -71,6 +77,15 @@ export const accountsSlice = createSlice({
                     state.success = false;
                     state.message = 'Email đã tồn tại';
                 }
+            })
+            .addCase(fetchLogout.pending, (state) => {
+                state.status = 'pending';
+            })
+            .addCase(fetchLogout.fulfilled, (state, action) => {
+                state.status = 'idle';
+                localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+                state.isAuth = false;
+                state.data = {};
             });
     },
 });
@@ -79,11 +94,7 @@ export const fetchRegister = createAsyncThunk(
     'accounts/fetchRegister',
     async ({ email, password, fullname }) => {
         try {
-            const res = await axios.post(`${API_URL}/api/auth/register`, {
-                email,
-                password,
-                fullname,
-            });
+            const res = await registerApi(email, password, fullname);
             return res.data;
         } catch (error) {
             return isRejectedWithValue(error.response);
@@ -95,7 +106,7 @@ export const fetchLogin = createAsyncThunk(
     'accounts/fetchLogin',
     async (data) => {
         try {
-            const res = await axios.post(`${API_URL}/api/auth/login`, data);
+            const res = await loginApi(data);
             return res.data;
         } catch (error) {
             return isRejectedWithValue(error.response);
@@ -108,7 +119,7 @@ export const fetchUser = createAsyncThunk('accounts/fetchUser', async () => {
         setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
     }
     try {
-        const res = await axios.get(`${API_URL}/api/auth/fetchUser`);
+        const res = await fetchUserApi();
         return res.data;
     } catch (error) {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
@@ -116,3 +127,17 @@ export const fetchUser = createAsyncThunk('accounts/fetchUser', async () => {
         return isRejectedWithValue(error.response);
     }
 });
+
+export const fetchLogout = createAsyncThunk(
+    'accounts/fetchLogout',
+    async () => {
+        try {
+            const res = await logoutApi();
+            return res.data;
+        } catch (error) {
+            localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+            setAuthToken(null);
+            return isRejectedWithValue(error.response);
+        }
+    },
+);

@@ -1,25 +1,27 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import config from '~/config';
+
+// --- ROUTES ---
 import {
     adminPrivateRoutes,
     privateRoutes,
     publicRoutes,
     recruiterPrivateRoutes,
 } from '~/routers';
-import { fetchUser } from './pages/Accounts/accountsSlice';
-import Home from './pages/Home';
 import ProtectedRoute from './routers/ProtectedRoute';
+import { fetchUser } from './pages/Accounts/accountsSlice';
 import { renderRoutes } from './utils/route.utils';
+import Home from './pages/Home';
 import {
     accountsDataSelector,
     isAuthSelector,
 } from '~/redux/Selectors/authSelector';
 import DefaultLayout from './Layouts/DefaultLayout';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
     const dispatch = useDispatch();

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { Outlet, Navigate } from 'react-router-dom';
 
-function ProtectedRoute({ redirectPath, isAllowed }) {
+function ProtectedRoute({ redirectPath, isAllowed, children }) {
     if (!isAllowed) {
         return <Navigate to={redirectPath} replace />;
     }
 
-    return <Outlet />;
+    return children ? children : <Outlet />;
 }
 
 ProtectedRoute.propTypes = {

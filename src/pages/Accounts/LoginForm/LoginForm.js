@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { ButtonSubmit } from '~/StyledComponent/Button';
 import { fetchLogin } from '../accountsSlice';
@@ -18,14 +18,13 @@ const cx = classNames.bind(styles);
 
 function LoginForm() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const formikRef = useRef(null);
     const messageRef = useRef(null);
     const messageError = useSelector(accountsMessageSelector);
     const isSuccess = useSelector(isSuccessSelector);
 
     if (isSuccess) {
-        navigate(config.routes.home);
+        return <Navigate to={config.routes.home} replace />;
     }
 
     const handleSubmit = () => {

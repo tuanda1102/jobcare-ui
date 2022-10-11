@@ -1,13 +1,22 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
 import styles from './UserOptions.module.scss';
 import images from '~/assets/images';
+import { fetchLogout } from '~/pages/Accounts/accountsSlice';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
 function UserOptions({ user }) {
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        dispatch(fetchLogout());
+    };
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('header')}>
@@ -35,7 +44,7 @@ function UserOptions({ user }) {
                 <hr />
                 <ul className={cx('option-list')}>
                     <li className={cx('option-item')}>
-                        <Link to="/">Trang cá nhân</Link>
+                        <Link to={config.routes.profile}>Trang cá nhân</Link>
                     </li>
                 </ul>
 
@@ -54,8 +63,13 @@ function UserOptions({ user }) {
                     <li className={cx('option-item')}>
                         <Link to="/">Cài đặt</Link>
                     </li>
-                    <li className={cx('option-item')}>
-                        <Link to="/">Đăng xuất</Link>
+                    <li
+                        onClick={() => {
+                            handleLogout();
+                        }}
+                        className={cx('option-item')}
+                    >
+                        <Link to={config.routes.accounts}>Đăng xuất</Link>
                     </li>
                 </ul>
             </ul>

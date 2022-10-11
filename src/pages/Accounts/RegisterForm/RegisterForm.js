@@ -1,11 +1,11 @@
 import classNames from 'classnames/bind';
-import styles from '../FormAccounts.module.scss';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import styles from '../FormAccounts.module.scss';
 import { ButtonSubmit } from '~/StyledComponent/Button';
 import { fetchRegister } from '../accountsSlice';
 import {
@@ -18,7 +18,6 @@ const cx = classNames.bind(styles);
 
 function RegisterForm() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const formikRef = useRef(null);
     const messageRef = useRef(null);
@@ -26,7 +25,7 @@ function RegisterForm() {
     const isSuccess = useSelector(isSuccessSelector);
 
     if (isSuccess) {
-        navigate(config.routes.home);
+        return <Navigate to={config.routes.home} replace />;
     }
 
     const handleSubmit = () => {

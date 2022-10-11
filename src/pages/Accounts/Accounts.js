@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import config from '~/config';
 import Loading from '~/components/Loading/Loading';
@@ -15,13 +15,11 @@ import images from '~/assets/images';
 const cx = classNames.bind(styles);
 
 export default function Accounts() {
-    const navigate = useNavigate();
-
     const status = useSelector(accountsStatusSelector);
     const isAuth = useSelector(isAuthSelector);
 
     if (isAuth) {
-        navigate(config.routes.profile, { replace: true });
+        return <Navigate to={config.routes.profile} replace />;
     }
 
     return (
