@@ -1,6 +1,8 @@
+import React from 'react';
 import classNames from 'classnames/bind';
 import styles from './Recruitment.module.scss';
-
+import Button from '~/components/Button';
+// import AddLogo from './Addlogo';
 const cx = classNames.bind(styles);
 
 function Recruitment() {
@@ -20,13 +22,19 @@ function Recruitment() {
                             className={cx('input')}
                         />
                     </div>
+                    {/* <AddLogo /> */}
                     <div className={cx('content-avatar')}>
-                        <label for="upload-photo">Thêm logo</label>
+                        <label
+                            for="upload-photo"
+                            className={cx('upload-photo')}
+                        >
+                            <img src="" alt="" className={cx('logo')} />
+                        </label>
                         <input
                             type="file"
                             name="photo"
                             id="upload-photo"
-                            className={cx('upload-photo')}
+                            className={cx('upimg-btn')}
                         />
                     </div>
                 </div>
@@ -252,12 +260,12 @@ function Recruitment() {
                 </div>
                 <div className={cx('submit-btn')}>
                     <div className={cx('btn-left')}>
-                        <button className={cx('save-btn')}>Lưu nháp</button>
+                        <Button saveInput>Lưu nháp</Button>
                     </div>
 
                     <div className={cx('btn-right')}>
-                        <button className={cx('reinput-btn')}>Nhập lại</button>
-                        <button className={cx('post-btn')}>Đăng bài</button>
+                        <Button reInput>Nhập lại</Button>
+                        <Button primary>Đăng bài</Button>
                     </div>
                 </div>
             </div>

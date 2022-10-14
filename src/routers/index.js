@@ -8,11 +8,10 @@ export const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.recruitment, component: Recruitment },
     { path: config.routes.accounts, component: Accounts, layout: null },
-];
-
-export const privateRoutes = [
     { path: config.routes.profile, component: Profile },
 ];
+
+export const privateRoutes = [];
 
 export const userPrivateRoutes = [];
 export const recruiterPrivateRoutes = [];
