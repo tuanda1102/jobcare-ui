@@ -19,7 +19,7 @@ export default function Accounts() {
     const isAuth = useSelector(isAuthSelector);
 
     if (isAuth) {
-        return <Navigate to={config.routes.profile} replace />;
+        return <Navigate to={config.routes.home} replace />;
     }
 
     return (

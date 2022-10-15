@@ -22,6 +22,7 @@ import {
     isAuthSelector,
 } from '~/redux/Selectors/authSelector';
 import DefaultLayout from './Layouts/DefaultLayout';
+import Loading from './components/Loading/Loading';
 
 function App() {
     const dispatch = useDispatch();
@@ -32,6 +33,10 @@ function App() {
         dispatch(fetchUser());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    if (typeof isAuth === 'undefined') {
+        return <Loading></Loading>;
+    }
 
     return (
         <Router>
@@ -47,7 +52,7 @@ function App() {
                             <ProtectedRoute
                                 redirectPath={config.routes.accounts}
                                 isAllowed={isAuth}
-                            ></ProtectedRoute>
+                            />
                         }
                     >
                         {renderRoutes(privateRoutes)}

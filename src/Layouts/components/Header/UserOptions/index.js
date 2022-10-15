@@ -43,34 +43,53 @@ function UserOptions({ user }) {
             <ul className={cx('option')}>
                 <hr />
                 <ul className={cx('option-list')}>
-                    <li className={cx('option-item')}>
-                        <Link to={config.routes.profile}>Trang cá nhân</Link>
-                    </li>
-                </ul>
-
-                <hr />
-                <ul className={cx('option-list')}>
-                    <li className={cx('option-item')}>
-                        <Link to="/">Viết blog</Link>
-                    </li>
-                    <li className={cx('option-item')}>
-                        <Link to="/">Bài viết đã lưu</Link>
-                    </li>
-                </ul>
-
-                <hr />
-                <ul className={cx('option-list')}>
-                    <li className={cx('option-item')}>
-                        <Link to="/">Cài đặt</Link>
-                    </li>
-                    <li
-                        onClick={() => {
-                            handleLogout();
-                        }}
-                        className={cx('option-item')}
+                    <Link
+                        className={cx('option-item-link')}
+                        to={config.routes.profile}
                     >
-                        <Link to={config.routes.accounts}>Đăng xuất</Link>
-                    </li>
+                        <li className={cx('option-item')}>Trang cá nhân</li>
+                    </Link>
+                </ul>
+
+                <hr />
+                <ul className={cx('option-list')}>
+                    <Link
+                        className={cx('option-item-link')}
+                        to={config.routes.blog}
+                    >
+                        <li className={cx('option-item')}>Viết blog</li>
+                    </Link>
+
+                    <Link
+                        className={cx('option-item-link')}
+                        to={config.routes.blog}
+                    >
+                        <li className={cx('option-item')}>Bài viết đã lưu</li>
+                    </Link>
+                </ul>
+
+                <hr />
+                <ul className={cx('option-list')}>
+                    <Link
+                        className={cx('option-item-link')}
+                        to={config.routes.blog}
+                    >
+                        <li className={cx('option-item')}>Cài đặt</li>
+                    </Link>
+
+                    <Link
+                        className={cx('option-item-link')}
+                        to={config.routes.accounts}
+                    >
+                        <li
+                            onClick={() => {
+                                handleLogout();
+                            }}
+                            className={cx('option-item')}
+                        >
+                            Đăng xuất
+                        </li>
+                    </Link>
                 </ul>
             </ul>
         </div>

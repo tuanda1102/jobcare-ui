@@ -17,7 +17,7 @@ export const accountsSlice = createSlice({
     initialState: {
         status: 'idle',
         success: false,
-        isAuth: false,
+        isAuth: undefined,
         message: '',
         data: {},
     },

@@ -21,6 +21,15 @@
     }
 }
 
+.option-item-link {
+    &:hover {
+        color: var(--secondary-color) !important;
+    }
+    .option-item {
+        padding: 6px 0;
+    }
+}
+
 .header {
     height: var(--default-layout-header-height);
     display: flex;
@@ -54,14 +63,6 @@
     .option-list {
         .option-item {
             padding: 6px 0;
-
-            &:hover {
-                a {
-                    padding-left: 10px;
-                    transition: all 0.3s;
-                    color: var(--secondary-color) !important;
-                }
-            }
         }
     }
 }
