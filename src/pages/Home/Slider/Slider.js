@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './Slider.module.scss';
 import images from '~/assets/images';
+import Container from 'react-bootstrap/Container';
 
 const cx = classNames.bind(styles);
 
@@ -39,19 +40,21 @@ function Carousel() {
     };
 
     return (
-        <div className={cx('wrapper')}>
-            <Slider {...settings} className={cx('slider')}>
-                {dataSlider.map((sliderItem, index) => {
-                    return (
-                        <div key={index} className={cx('slider-item')}>
-                            <Link to="/">
-                                <img src={sliderItem.thumb} alt="thumb" />
-                            </Link>
-                        </div>
-                    );
-                })}
-            </Slider>
-        </div>
+        <Container>
+            <div className={cx('wrapper')}>
+                <Slider {...settings} className={cx('slider')}>
+                    {dataSlider.map((sliderItem, index) => {
+                        return (
+                            <div key={index} className={cx('slider-item')}>
+                                <Link to="/">
+                                    <img src={sliderItem.thumb} alt="thumb" />
+                                </Link>
+                            </div>
+                        );
+                    })}
+                </Slider>
+            </div>
+        </Container>
     );
 }
 

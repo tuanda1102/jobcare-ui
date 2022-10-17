@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 
 import styles from './BestRecruitment.module.scss';
 import Card from '~/components/Card/Card';
+import { Container } from 'react-bootstrap';
 
 const cx = classNames.bind(styles);
 
@@ -94,17 +95,19 @@ const recruitmentList = [
 
 export default function BestRecruitment() {
     return (
-        <div className={cx('wrapper')}>
-            <h2 className={cx('heading')}>Việc làm nổi bật</h2>
-            <Row>
-                {recruitmentList.slice(0, 8).map((recruitment, index) => {
-                    return (
-                        <Col key={index} lg={3} md={4} sm={6}>
-                            <Card data={recruitment}></Card>
-                        </Col>
-                    );
-                })}
-            </Row>
-        </div>
+        <Container>
+            <div className={cx('wrapper')}>
+                <h2 className={cx('heading')}>Việc làm nổi bật</h2>
+                <Row>
+                    {recruitmentList.slice(0, 8).map((recruitment, index) => {
+                        return (
+                            <Col key={index} lg={3} md={4} sm={6}>
+                                <Card data={recruitment}></Card>
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </div>
+        </Container>
     );
 }
