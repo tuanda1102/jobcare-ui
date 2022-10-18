@@ -20,9 +20,10 @@ const navigationMenu = [
     },
     {
         title: 'Làm bài test',
-        to: '/test-user',
+        to: '/testuser',
         role: ['user'],
     },
+
     {
         title: 'Tạo CV',
         to: '/cv',

@@ -57,6 +57,7 @@ function App() {
                     >
                         {renderRoutes(privateRoutes)}
                     </Route>
+
                     {/* For Recruiter */}
                     <Route
                         element={
