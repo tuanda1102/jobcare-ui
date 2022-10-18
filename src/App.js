@@ -11,6 +11,9 @@ import {
 } from '~/routers';
 import { fetchUser } from './pages/Accounts/accountsSlice';
 import Home from './pages/Home';
+import TestUser from './pages/TestUser';
+import PostQuiz from './pages/PostQuiz';
+
 import ProtectedRoute from './routers/ProtectedRoute';
 import { renderRoutes } from './utils/route.utils';
 import {
@@ -20,6 +23,9 @@ import {
 import DefaultLayout from './Layouts/DefaultLayout';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import InformationTechnology from './pages/InformationTechnology';
+import DisplayQuizz from './pages/DisplayQuizz';
+
 
 function App() {
     const dispatch = useDispatch();
@@ -49,6 +55,7 @@ function App() {
                     >
                         {renderRoutes(privateRoutes)}
                     </Route>
+
                     {/* For Recruiter */}
                     <Route
                         element={
@@ -82,6 +89,41 @@ function App() {
                         element={
                             <DefaultLayout>
                                 <Home />
+                            </DefaultLayout>
+                        }
+                    />
+                    <Route
+                        path="/testuser"
+                        element={
+                            <DefaultLayout>
+                                <TestUser />
+                            </DefaultLayout>
+                        }
+                    />
+
+                    <Route
+                        path="/informationtechnology"
+                        element={
+                            <DefaultLayout>
+                                <InformationTechnology />
+                            </DefaultLayout>
+                        }
+                    />
+
+                    <Route
+                        path="/informationtechnology/displayquizz"
+                        element={
+                            <DefaultLayout>
+                                <DisplayQuizz />
+                            </DefaultLayout>
+                        }
+                    />
+
+                    <Route
+                        path="/postquiz"
+                        element={
+                            <DefaultLayout>
+                                <PostQuiz/>
                             </DefaultLayout>
                         }
                     />
