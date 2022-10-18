@@ -22,15 +22,15 @@ export default function Card({ data }) {
                     <div className={cx('subdesc')}>
                         <div className={cx('subdesc-item subdesc-left')}>
                             <div className={cx('subdesc-text')}>
-                                <h1 name="cash-outline"></h1>
+                                <ion-icon name="cash-outline"></ion-icon>
                                 <span>{data?.salary}</span>
                             </div>
                             <div className={cx('subdesc-text')}>
-                                <h1 name="location-outline"></h1>
+                                <ion-icon name="location-outline"></ion-icon>
                                 <span>{data?.location}</span>
                             </div>
                             <div className={cx('subdesc-text')}>
-                                <h1 name="timer-outline"></h1>
+                                <ion-icon name="timer-outline"></ion-icon>
                                 <span>{data?.createAt}</span>
                             </div>
                         </div>

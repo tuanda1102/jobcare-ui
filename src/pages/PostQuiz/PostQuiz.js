@@ -1,15 +1,12 @@
 import classNames from 'classnames/bind';
-import styles from './PostQuiz.module.scss';
-import React, { useState, useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
 
+import styles from './PostQuiz.module.scss';
 import Uploady from '@rpldy/uploady';
 import UploadButton from '@rpldy/upload-button';
 import UploadPreview from '@rpldy/upload-preview';
 
-import Form from 'react-bootstrap/Form';
 import UserForm from './UserForm';
-
-
 
 const cx = classNames.bind(styles);
 
@@ -109,7 +106,7 @@ function PostQuiz() {
                         <option value="6">120 phút</option>
                     </Form.Select>
                 </div>
-                <UserForm/>
+                <UserForm />
             </div>
         </div>
     );

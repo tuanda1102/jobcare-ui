@@ -1,10 +1,4 @@
 import classNames from 'classnames/bind';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
-} from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Search.module.scss';
 
@@ -17,14 +11,11 @@ function Search() {
                 <div className={cx('search')}>
                     <input placeholder="Tìm kiếm" spellCheck={false} />
                     <button className={cx('clear')}>
-                        <FontAwesomeIcon icon={faCircleXmark} />
+                        <ion-icon name="close-circle-outline"></ion-icon>
                     </button>
-                    <FontAwesomeIcon
-                        className={cx('loading')}
-                        icon={faSpinner}
-                    />
+                    <ion-icon name="refresh-outline"></ion-icon>
                     <button className={cx('search-btn')}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        <ion-icon name="search-outline"></ion-icon>
                     </button>
                 </div>
             </div>

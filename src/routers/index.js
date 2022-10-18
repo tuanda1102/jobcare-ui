@@ -8,7 +8,6 @@ import Recruitment from '~/pages/Recruitment/Recruitment';
 import TestUser from '~/pages/TestUser';
 import InformationTechnology from '~/pages/InformationTechnology';
 import DisplayQuizz from '~/pages/DisplayQuizz';
-import PostQuiz from '~/pages/PostQuiz';
 
 export const publicRoutes = [
     { path: config.routes.home, component: Home },
@@ -28,5 +27,4 @@ export const userPrivateRoutes = [];
 export const recruiterPrivateRoutes = [];
 export const adminPrivateRoutes = [
     { path: config.routes.admin, component: Admin },
-    { path: config.routes.admin, component: PostQuiz },
 ];

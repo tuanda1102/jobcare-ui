@@ -2,10 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './DisplayQuizz.module.scss';
 import Sidebar from './Sidebar';
 import React, { useState, useEffect, useRef } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faList } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -324,23 +321,19 @@ function DisplayQuizz() {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, [showScore]);
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-    }, [showScore]);
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('notification-bar')}>
                     <h5 className={cx('total-question-icon')}>
-                        <FontAwesomeIcon icon={faList} />
+                        <ion-icon name="list-outline"></ion-icon>
                     </h5>
                     <h5 className={cx('total-question')}>
                         {Questions.length} câu
                     </h5>
 
                     <h5 className={cx('time-icon')}>
-                        <FontAwesomeIcon icon={faClock} />
+                        <ion-icon name="time-outline"></ion-icon>
                     </h5>
                     <h5 className={cx('time')}>{timer}</h5>
                 </div>

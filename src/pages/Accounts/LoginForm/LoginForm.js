@@ -31,8 +31,8 @@ function LoginForm() {
             <Formik
                 innerRef={formikRef}
                 initialValues={{
-                    email: '1@gmail.com',
-                    password: 'asd123123',
+                    email: '',
+                    password: '',
                 }}
                 onSubmit={() => {
                     handleSubmit();

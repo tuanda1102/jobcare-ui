@@ -140,29 +140,28 @@ export default function BestRecruitment() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('wrapper-infomationtechnology')}>
-            <div className={cx('inner')}>
-                <img
-                    className={cx('avatar-infomationtechnology')}
-                    src="https://www.aeccglobal.com.np/images/easyblog_articles/247/b2ap3_amp_top-information-technology-courses-in-australia.png"
-                />
-                <div className={cx('describe')}>
-                    <p className={cx('heading-informationtechnology')}>
-                        Công nghệ thông tin
-                    </p>
-                    <p className={cx('title-informationtechnology')}>
-                        Dưới đây là những quizz phổ biến nhất để bạn luyện tập
-                        chuẩn bị cho cuộc phỏng vấn sắp tới !
-                    </p>
-                </div>
+                <div className={cx('inner')}>
+                    <img
+                        className={cx('avatar-infomationtechnology')}
+                        src="https://www.aeccglobal.com.np/images/easyblog_articles/247/b2ap3_amp_top-information-technology-courses-in-australia.png"
+                        alt="something-img"
+                    />
+                    <div className={cx('describe')}>
+                        <p className={cx('heading-informationtechnology')}>
+                            Công nghệ thông tin
+                        </p>
+                        <p className={cx('title-informationtechnology')}>
+                            Dưới đây là những quizz phổ biến nhất để bạn luyện
+                            tập chuẩn bị cho cuộc phỏng vấn sắp tới !
+                        </p>
+                    </div>
                 </div>
             </div>
             <Row>
                 {recruitmentList.slice(0, 12).map((recruitment, index, to) => {
                     return (
                         <Col key={index} lg={3} md={4} sm={6}>
-                            <Card data={recruitment} to={'displayquizz'}>
-                                    
-                            </Card>
+                            <Card data={recruitment} to={'displayquizz'}></Card>
                         </Col>
                     );
                 })}
