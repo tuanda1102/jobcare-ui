@@ -15,6 +15,7 @@ export const loginApi = async (data) => {
 
 export const fetchUserApi = async () => {
     return await axios.get(`${API_URL}/api/auth/fetchUser`);
+    // return await api.get(`/api/auth/fetchUser`);
 };
 
 export const logoutApi = async () => {

@@ -11,6 +11,7 @@ import {
     logoutApi,
     registerApi,
 } from '~/services/userService';
+import tokenService from '~/services/tokenService';
 
 export const accountsSlice = createSlice({
     name: 'accounts',
@@ -46,8 +47,7 @@ export const accountsSlice = createSlice({
                     state.status = 'idle';
                     state.success = true;
                     state.isAuth = true;
-                    localStorage.setItem(
-                        LOCAL_STORAGE_TOKEN_NAME,
+                    tokenService.updateLocalAccessToken(
                         action.payload.data.accessToken,
                     );
                     state.message = '';
@@ -67,8 +67,7 @@ export const accountsSlice = createSlice({
                     state.success = true;
                     state.isAuth = true;
                     state.message = '';
-                    localStorage.setItem(
-                        LOCAL_STORAGE_TOKEN_NAME,
+                    tokenService.updateLocalAccessToken(
                         action.payload.data.accessToken,
                     );
                     state.data = action.payload.data;
@@ -81,9 +80,9 @@ export const accountsSlice = createSlice({
             .addCase(fetchLogout.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(fetchLogout.fulfilled, (state, action) => {
+            .addCase(fetchLogout.fulfilled, (state) => {
                 state.status = 'idle';
-                localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+                tokenService.removeAccessToken(LOCAL_STORAGE_TOKEN_NAME);
                 state.isAuth = false;
                 state.data = {};
             });
@@ -115,14 +114,18 @@ export const fetchLogin = createAsyncThunk(
 );
 
 export const fetchUser = createAsyncThunk('accounts/fetchUser', async () => {
-    if (localStorage[LOCAL_STORAGE_TOKEN_NAME]) {
-        setAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME]);
+    const localAccessToken = tokenService.getLocalAccessToken(
+        LOCAL_STORAGE_TOKEN_NAME,
+    );
+
+    if (localAccessToken) {
+        setAuthToken(localAccessToken);
     }
     try {
         const res = await fetchUserApi();
         return res.data;
     } catch (error) {
-        localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+        tokenService.removeAccessToken(LOCAL_STORAGE_TOKEN_NAME);
         setAuthToken(null);
         return isRejectedWithValue(error.response);
     }
@@ -135,7 +138,7 @@ export const fetchLogout = createAsyncThunk(
             const res = await logoutApi();
             return res.data;
         } catch (error) {
-            localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+            tokenService.removeAccessToken(LOCAL_STORAGE_TOKEN_NAME);
             setAuthToken(null);
             return isRejectedWithValue(error.response);
         }
