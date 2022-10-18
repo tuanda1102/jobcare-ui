@@ -4,9 +4,11 @@ import Accounts from '~/pages/Accounts/Accounts';
 import Profile from '~/pages/Profile/Profile';
 import Admin from '~/pages/Admin/Admin';
 import Blog from '~/pages/Blogs/Blog';
+import Recruitment from '~/pages/Recruitment/Recruitment';
 
 export const publicRoutes = [
     { path: config.routes.home, component: Home },
+    { path: config.routes.recruitment, component: Recruitment },
     { path: config.routes.accounts, component: Accounts, layout: null },
     { path: config.routes.blog, component: Blog },
 ];

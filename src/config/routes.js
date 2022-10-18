@@ -4,6 +4,7 @@ const routes = {
     profile: '/profile',
     accounts: '/accounts',
     blog: '/blog',
+    recruitment: '/recruitment/post',
 };
 
 export default routes;

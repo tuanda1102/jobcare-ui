@@ -57,7 +57,24 @@
         opacity: 0.9;
     }
 }
-
+.reInput {
+    color: var(--black-color) !important;
+    background-color: var(--white-color);
+    border-color: var(--primary-color);
+    &:hover {
+        border-color: var(--white-color);
+        opacity: 0.9;
+    }
+}
+.saveInput {
+    color: var(--white-color) !important;
+    background-color: var(--save-color);
+    border-color: var(--primary-color);
+    &:hover {
+        border-color: var(--primary-color);
+        opacity: 0.9;
+    }
+}
 .outline {
     color: var(--primary-color);
     border-color: currentColor;
